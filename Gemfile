@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'devise'
 gem 'omniauth-foursquare'
+gem 'foursquare2'
 
 group :development, :test do
   gem 'pry-byebug'

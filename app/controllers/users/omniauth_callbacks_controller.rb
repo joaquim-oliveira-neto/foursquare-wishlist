@@ -1,6 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def foursquare
 
+  def foursquare
     user = User.find_for_foursquare_oauth(request.env['omniauth.auth'])
 
     if user.persisted?

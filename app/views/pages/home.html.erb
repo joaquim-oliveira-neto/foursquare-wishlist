@@ -1,2 +1,25 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div>
+  <h2>Wishlist</h2>
+  <ul id="wishlist" class="flex-container wrap">
+  </ul>
+</div>
+
+<div>
+  <h2>Recent</h2>
+  <ul class="flex-container wrap">
+    <% @friends_venues.each do |venue| %>
+      <div class="flex-item">
+        <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_url(venue[:image]) %>);">
+          <div class="card-description">
+            <h2><%= venue[:name] %></h2>
+          </div>
+          <%= image_tag venue[:friend_photo], class: "card-user" %>
+          <a class="card-link" href="#" ></a>
+        </div>
+        <div>
+          <%= link_to "Add", root_path, class: "btn btn-primary margin-top"  %>
+        </div>
+      </div>
+    <% end %>
+  </ul>
+</div>

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, :omniauth_providers => [:foursquare]
 
-  has_many :whislists
+  has_many :venues
 
   def self.find_for_foursquare_oauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -1,23 +1,36 @@
 <div>
   <h2>Wishlist</h2>
-  <ul id="wishlist" class="flex-container wrap">
+  <ul class="flex-container wrap">
+    <% @wishlist.each do |place| %>
+      <div class="flex-item">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_url(place[:venue_photo]) %>);">
+          <div class="card-description">
+            <h2><%= place[:venue_name] %></h2>
+          </div>
+          <a class="card-link" href="#" ></a>
+        </div>
+        <div>
+          <%= link_to "Del", page_path(place[:place_id]), method: :delete, class: "btn btn-danger margin-top"  %>
+        </div>
+      </div>
+    <% end %>
   </ul>
 </div>
 
 <div>
   <h2>Recent</h2>
   <ul class="flex-container wrap">
-    <% @friends_venues.each do |venue| %>
+    <% @checkins.each do |checkin| %>
       <div class="flex-item">
-        <div class="card " style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_url(venue[:image]) %>);">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_url(checkin[:venue_photo]) %>);">
           <div class="card-description">
-            <h2><%= venue[:name] %></h2>
+            <h2><%= checkin[:venue_name] %></h2>
           </div>
-          <%= image_tag venue[:friend_photo], class: "card-user" %>
+          <%= image_tag checkin[:user_photo], class: "card-user" %>
           <a class="card-link" href="#" ></a>
         </div>
         <div>
-          <%= link_to "Add", root_path, class: "btn btn-primary margin-top"  %>
+          <%= link_to "Add", pages_path(checkin), method: :post, class: "btn btn-primary margin-top"  %>
         </div>
       </div>
     <% end %>

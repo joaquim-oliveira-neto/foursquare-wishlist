@@ -15,9 +15,9 @@ class FoursquareService
 
       checkins << {
         checkin_id:  checkin.id,
-        venue_photo: get_venue_photo_as_url(venue),
+        venue_photo: get_venue_photo_as_url(venue, '300x300'),
         venue_name:  venue.name,
-        user_photo:  get_user_photo_as_url(user)
+        user_photo:  get_user_photo_as_url(user, '100x100')
       }
     end
     checkins
@@ -31,7 +31,7 @@ class FoursquareService
       venue = checkin.venue
       wishlist << {
         place_id: place.id,
-        venue_photo: get_venue_photo_as_url(venue),
+        venue_photo: get_venue_photo_as_url(venue, '300x300'),
         venue_name:  venue.name,
         }
     end
@@ -49,21 +49,24 @@ class FoursquareService
     )
   end
 
-  def get_venue_photo_as_url(venue)
+  private
+
+  def get_venue_photo_as_url(venue, photo_dimensions)
     venue_photos = @client.venue_photos(venue.id)
     return "" if venue_photos.items.empty?
 
-    venue_photo_params = venue_photos.items[0]
-    photo_prefix       = venue_photo_params.prefix
-    photo_suffix       = venue_photo_params.suffix
-
-    "#{photo_prefix}300x300#{photo_suffix}"
+    venue_photo_params = venue_photos.items[0] # get first image from array
+    get_photo_as_url(venue_photo_params, photo_dimensions)
   end
 
-  def get_user_photo_as_url(user)
-    photo_prefix       = user.photo.prefix
-    photo_suffix       = user.photo.suffix
+  def get_user_photo_as_url(user, photo_dimensions)
+    get_photo_as_url(user.photo, photo_dimensions)
+  end
 
-    "#{photo_prefix}100x100#{photo_suffix}"
+  def get_photo_as_url(photo_params, photo_dimensions)
+    photo_prefix = photo_params.prefix
+    photo_suffix = photo_params.suffix
+
+    "#{photo_prefix}#{photo_dimensions}#{photo_suffix}"
   end
 end

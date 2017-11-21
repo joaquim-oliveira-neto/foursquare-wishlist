@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
 
   def home
-    fs = FoursquareService.new(user: current_user)
-    @checkins = fs.get_recent_checkins_formatted
-    @wishlist = fs.get_whishlist_formatted
+    foursquare_serivce = FoursquareService.new(user: current_user)
+    @checkins = foursquare_serivce.get_recent_checkins_formatted
+    @wishlist = foursquare_serivce.get_whishlist_formatted
   end
 
   def create

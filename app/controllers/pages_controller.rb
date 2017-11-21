@@ -8,11 +8,14 @@ class PagesController < ApplicationController
       venue = checkin.venue
       user  = checkin.user
 
+      next if Place.find_by(checkin_id: checkin.id)
+      next if user.id == current_user.uid
+
       @checkins << {
         checkin_id:  checkin.id,
-        venue_photo: "",#get_venue_photo_as_url(venue),
+        venue_photo: get_venue_photo_as_url(venue),
         venue_name:  venue.name,
-        user_photo:  "",#get_user_photo_as_url(user)
+        user_photo:  get_user_photo_as_url(user)
       }
     end
 
@@ -23,7 +26,7 @@ class PagesController < ApplicationController
       venue = checkin.venue
       @wishlist << {
         place_id: place.id,
-        venue_photo: "",#get_venue_photo_as_url(venue),
+        venue_photo: get_venue_photo_as_url(venue),
         venue_name:  venue.name,
         }
     end

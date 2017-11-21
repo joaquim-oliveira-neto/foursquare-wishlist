@@ -4,6 +4,11 @@
   display: flex;
 }
 
+.flex-container-centered {
+  display: flex;
+  justify-content: center;
+}
+
 .wrap {
   flex-wrap: wrap;
 }
@@ -13,8 +18,8 @@
 }
 
 .card {
-  height: 300px;
-  width: 300px;
+  height: 225px;
+  width: 225px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-size: cover !important;
   background-position: center;

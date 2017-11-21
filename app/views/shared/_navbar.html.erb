@@ -1,6 +1,8 @@
 <div class="navbar">
   <!-- Logo -->
-   <p class= "navbar-brand"> Wishlist</p>
+  <div>
+    <p class= "navbar-brand"> Wishlist</p>
+  </div>
 
 
 
@@ -12,7 +14,7 @@
       <!-- Avatar with dropdown menu -->
       <div class="navbar-item">
         <p><%= current_user.first_name %></p>
-        <div class="dropdown">
+        <div class="dropdown navbar-clickable">
           <%= image_tag current_user.photo, class: "avatar dropdown-toggle", id: "navbar-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-dropdown-menu">
             <li>

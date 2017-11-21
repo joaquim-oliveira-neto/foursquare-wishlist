@@ -1,23 +1,25 @@
-<div>
-  <h2>Wishlist</h2>
-  <ul class="flex-container wrap">
-    <% @wishlist.each do |place| %>
-      <div class="flex-item">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_url(place[:venue_photo]) %>);">
-          <div class="card-description">
-            <h2><%= place[:venue_name] %></h2>
+<% unless @wishlist.empty? %>
+  <div class="margin-h-sm">
+    <h2>Wishlist</h2>
+    <ul class="flex-container wrap">
+      <% @wishlist.each do |place| %>
+        <div class="flex-item">
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_url(place[:venue_photo]) %>);">
+            <div class="card-description">
+              <h2><%= place[:venue_name] %></h2>
+            </div>
+            <a class="card-link" href="#" ></a>
           </div>
-          <a class="card-link" href="#" ></a>
+          <div>
+            <%= link_to "Del", page_path(place[:place_id]), method: :delete, class: "btn btn-danger margin-top"  %>
+          </div>
         </div>
-        <div>
-          <%= link_to "Del", page_path(place[:place_id]), method: :delete, class: "btn btn-danger margin-top"  %>
-        </div>
-      </div>
-    <% end %>
-  </ul>
-</div>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
-<div>
+<div class="margin-h-sm">
   <h2>Recent</h2>
   <ul class="flex-container wrap">
     <% @checkins.each do |checkin| %>

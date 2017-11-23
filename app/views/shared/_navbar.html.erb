@@ -1,22 +1,20 @@
-<div class="navbar">
+<div class="navbar-wagon">
   <!-- Logo -->
-  <div>
-    <p class= "navbar-brand"> Wishlist</p>
-  </div>
-
-
+  <p class="navbar-wagon-brand"> Wishlist </p>
 
   <!-- Right Navigation -->
-  <div class="navbar-right hidden-xs hidden-sm">
+  <div class="navbar-wagon-right hidden-xs hidden-sm">
 
     <% if user_signed_in? %>
 
+      <!-- Links when logged in -->
+      <p class="navbar-wagon-item navbar-wagon-link"> <%= current_user.first_name %></p>
+
       <!-- Avatar with dropdown menu -->
-      <div class="navbar-item">
-        <p><%= current_user.first_name %></p>
-        <div class="dropdown navbar-clickable">
-          <%= image_tag current_user.photo, class: "avatar dropdown-toggle", id: "navbar-menu", "data-toggle" => "dropdown" %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-dropdown-menu">
+      <div class="navbar-wagon-item">
+        <div class="dropdown">
+          <%= image_tag current_user.photo, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
@@ -27,22 +25,30 @@
       </div>
     <% else %>
       <!-- Login link (when logged out) -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-item navbar-link" %>
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
 
   <!-- Dropdown list appearing on mobile only -->
-  <div class="navbar-item hidden-md hidden-lg">
+  <div class="navbar-wagon-item hidden-md hidden-lg">
     <div class="dropdown">
       <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
-      <ul class="dropdown-menu dropdown-menu-right navbar-dropdown-menu">
+      <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
         <li>
-          <%= link_to destroy_user_session_path, method: :delete do %>
-            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+          <% if user_signed_in? %>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+            <% end %>
+          <% else %>
+            <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
           <% end %>
         </li>
       </ul>
     </div>
   </div>
 </div>
+
+
+
+
 
